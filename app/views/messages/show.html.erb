@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Message #<%= @the_message.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/messages">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_message/<%= @the_message.id %>">
+          Delete message
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Automate
+      </dt>
+      <dd>
+        <%= @the_message.automate %>
+      </dd>
+
+      <dt>
+        Message
+      </dt>
+      <dd>
+        <%= @the_message.message %>
+      </dd>
+
+      <dt>
+        Due date
+      </dt>
+      <dd>
+        <%= @the_message.due_date %>
+      </dd>
+
+      <dt>
+        Task name
+      </dt>
+      <dd>
+        <%= @the_message.task_name %>
+      </dd>
+
+      <dt>
+        Phone number
+      </dt>
+      <dd>
+        <%= @the_message.phone_number %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_message.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_message.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit message
+    </h2>
+
+    <form action="/modify_message/<%= @the_message.id %>"  method="post" >
+      <div>
+        <input type="checkbox" id="automate_box" name="query_automate" value="1" <%= "checked" if @the_message.automate %>>
+
+        <label for="automate_box">
+            Automate
+        </label>
+      </div>
+
+      <div>
+        <label for="message_box">
+          Message
+        </label>
+
+        <input type="text" id="message_box" name="query_message" value="<%= @the_message.message %>">
+      </div>
+
+      <div>
+        <label for="due_date_box">
+          Due date
+        </label>
+
+        <input type="date" id="due_date_box" name="query_due_date" value="<%= @the_message.due_date %>">
+      </div>
+
+      <div>
+        <label for="task_name_box">
+          Task name
+        </label>
+
+        <input type="text" id="task_name_box" name="query_task_name" value="<%= @the_message.task_name %>">
+      </div>
+
+      <div>
+        <label for="phone_number_box">
+          Phone number
+        </label>
+
+        <input type="text" id="phone_number_box" name="query_phone_number" value="<%= @the_message.phone_number %>">
+      </div>
+
+      <button>
+        Update message
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
