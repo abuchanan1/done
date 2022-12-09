@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  #exporting csv
+  get("/export_photos", { :controller => "messages", :action => "export" })
+
+
   get("/", { :controller => "messages", :action => "home"})
 
   #testing sending messages

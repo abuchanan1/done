@@ -1,19 +1,24 @@
- <form action="/run_message" method="post">
-      <div>
-
-        <label for="query_name">Name</label>
-        <input type="text" id="query_name" name="query_name">
-
-      </div>
-        <label for="query_number">Phone Number</label>
-        <input type="text" id="query_number" name="query_number">
-         
-      </div>
-
-     
-      <button>
-        Create message
-      </button>
-    </form>
+ <div class="container-fluid">
+  <form action="/run_message" method="post">
+      
+        <div class="form-group row">
+          <label for="query_message" class="col-sm-2 col-form-label" >Message</label>
+          <div class="col-sm-10">
+          <textarea type="text"  id="query_message" name="query_message"></textarea>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="query_phone_number" class="col-sm-2 col-form-label" >Phone Number</label>
+          <div class="col-sm-10">
+          <input type="text" id="query_phone_number" name="query_phone_number">
+          </div>
+        </div>
+      
+        <button class="btn btn-primary">
+          Send message
+        </button>
+      </form>
+    </div>
   </div>
 </div>

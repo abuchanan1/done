@@ -12,4 +12,21 @@
 #  updated_at   :datetime         not null
 #
 class Message < ApplicationRecord
-end
+
+  def self.to_csv
+    messages = self.all
+    headers = ["id", "phone_number", "message", "created_at"]
+    csv = CSV.generate(headers: true) do |csv|
+      csv << headers
+      messages.each do |message|
+        row = []
+        row.push(message.id)
+        row.push(message.phone_number)
+        row.push(message.message)
+        row.push(message.created_at)
+        csv << row
+      end
+    end
+    return csv
+  end
+end 

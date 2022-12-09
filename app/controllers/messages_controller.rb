@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   require "twilio-ruby"
+  require "date"
 
   
   def home
@@ -30,6 +31,17 @@ class MessagesController < ApplicationController
 
 
   def run_a_message
+    the_message = Message.new
+    the_message.message = params.fetch("query_message")
+    the_message.phone_number = params.fetch("query_phone_number")
+
+    if the_message.valid?
+      the_message.save
+      redirect_to("/messages", { :notice => "Message created successfully." })
+    else
+      redirect_to("/messages", { :alert => the_message.errors.full_messages.to_sentence })
+    end
+
 
 
     twilio_sid = "ACb7b876131bda71bcd2eb2367d1a48493"
@@ -41,8 +53,8 @@ class MessagesController < ApplicationController
 
     sms_info = {
       :from => twilio_sending_number,
-      :to => "+13212020962", # Put your own phone number here if you want to see it in action
-      :body => "It's going to rain today — take an umbrella!"
+      :to => the_message.phone_number, # Put your own phone number here if you want to see it in action
+      :body => the_message.message
     }
 
     twilio_client.api.account.messages.create(sms_info) 
@@ -88,6 +100,15 @@ class MessagesController < ApplicationController
 
     the_message.destroy
 
-    redirect_to("/messages", { :notice => "Message deleted successfully."} )
+    redirect_to("/messages", { :notice  => "Message deleted successfully."} )
   end
+
+  def export
+    messages = Message.all
+    respond_to do |format|
+      format.csv do 
+        send_data(messages.to_csv, { :filename => "my_messages.csv"})
+      end
+    end
+  end 
 end
