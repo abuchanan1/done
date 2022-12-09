@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_message/:path_id", { :controller => "messages", :action => "update" })
+  #post("/modify_message/:path_id", { :controller => "messages", :action => "update" })
   
   # DELETE
   get("/delete_message/:path_id", { :controller => "messages", :action => "destroy" })

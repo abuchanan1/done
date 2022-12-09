@@ -44,8 +44,8 @@ class MessagesController < ApplicationController
 
 
 
-    twilio_sid = "ACb7b876131bda71bcd2eb2367d1a48493"
-    twilio_token = "2ccd360cec20d8a0c77b74884bf88fd3"
+    twilio_sid = ENV.fetch("TWILIO_SID")
+    twilio_token = ENV.fetch("TWILIO_TOKEN")
     twilio_sending_number = "+12057493915"
     message = 
 
